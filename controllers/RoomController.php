@@ -126,6 +126,9 @@ class RoomController extends Controller
      */
     public function actionDelete($id)
     {
+
+        // if malicious users can be present, here should be something to stop the user from deleting a reserved room
+
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
