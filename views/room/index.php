@@ -22,10 +22,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            // 'ID',
             'Name:ntext',
             'Reservation:ntext',
 
+            // This column houses a button for deleting and making a reservation
+            // both buttons have corresponding functions available in the controller
             [
                 'format'=>'raw',
                 'header'=>'Reserve or remove',
@@ -43,6 +44,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
 
+            // delete button is hidden if the room has a reservation
+            // it's still possible to use the delete function through guessing URL, assuming non-malicious users
             [
                 'class' => 'yii\grid\ActionColumn', 
                 'template'=>'{update} {delete}',
@@ -57,6 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
 
+        // reserved rooms have a highlighted row
         'rowOptions' => function($data) {    
             if ($data->reserved) return ['class'=>'danger']; 
         }
